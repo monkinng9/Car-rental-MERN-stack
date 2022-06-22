@@ -4,11 +4,15 @@ const port = process.env.PORT || 5000;
 const { errorHandler } = require('../backend/middleware/errorMiddleware');
 const connectDB = require('./config/db');
 
+
 connectDB();
 
 const app = express();
 
-app.use('/api/carItems', require('./routes/carItemRoutes'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use('/api/car-item', require('./routes/carItemRoutes'));
 
 app.use(errorHandler);
 

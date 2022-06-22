@@ -1,23 +1,32 @@
 const asyncHandler = require('express-async-handler');
+const CarItem = require('../models/carItemModel');
 
-const getCarItems = asyncHandler((req, res) => {
+const getCarItems = asyncHandler(async (req, res) => {
   res.status(200).json({ message: 'Get car item' });
 });
 
-const createCarItem = asyncHandler((req, res) => {
-  if(!req.body.text) {
+const createCarItem = asyncHandler(async (req, res) => {
+
+  if(!req.body.carID || !req.body.carType) {
     res.status(400);
-    throw new Error('Please add a text field');
+    throw new Error('Please add a ID car and type of car');
   }
 
-  res.status(200).json({ message: 'Post car item' });
+  const carItem = await CarItem.create({
+    carID: req.body.carID,
+    carType: req.body.carType,
+    carAvailable: true,
+  });
+
+  res.status(200).json(carItem);
+
 })
 
-const updateCarItem = asyncHandler((req, res) => {
+const updateCarItem = asyncHandler(async (req, res) => {
   res.status(200).json({ message: `Update car item ${req.params.id}` });
 })
 
-const deleteCarItem = asyncHandler((req, res) => {
+const deleteCarItem = asyncHandler(async (req, res) => {
   res.status(200).json({ message: `Delete car item ${req.params.id}` });
 })
 
