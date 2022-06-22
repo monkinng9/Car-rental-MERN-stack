@@ -2,7 +2,9 @@ const asyncHandler = require('express-async-handler');
 const CarItem = require('../models/carItemModel');
 
 const getCarItems = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Get car item' });
+  const carItems = await CarItem.find();
+  
+  res.status(200).json(carItems);
 });
 
 const createCarItem = asyncHandler(async (req, res) => {
@@ -23,6 +25,19 @@ const createCarItem = asyncHandler(async (req, res) => {
 })
 
 const updateCarItem = asyncHandler(async (req, res) => {
+  const carItem = await CarItem.findById(req.params.id);
+  
+  if(!carItem) {
+    res.status(400);
+    throw new Error('Car not foud!');
+  }
+
+  const updateCarItem 
+    = await CarItem
+        .findByIdAndUpdate(req.params.id, req.body, {new: true});
+      
+  
+  
   res.status(200).json({ message: `Update car item ${req.params.id}` });
 })
 
