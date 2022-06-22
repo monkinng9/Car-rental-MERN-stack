@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getCarItems, createCarItem, updateCarItem, deleteCarItem} = require('../controllers/carRentalController')
+const { getCarItems, createCarItem, updateCarItem, deleteCarItem} = require('../controllers/carItemController');
 
 router.get('/', getCarItems); 
 
