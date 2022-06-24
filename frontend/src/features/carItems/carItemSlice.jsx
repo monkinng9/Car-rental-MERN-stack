@@ -20,6 +20,17 @@ export const getCarItems = createAsyncThunk(
   }
 );
 
+// Create new Car Item
+export const createCarItem = createAsyncThunk(
+  'carItems/create',
+  async (carItemData, thunkAPI) => {
+    // Get token
+
+    // Use service
+    return await carItemService.createCarItem(carItemData);
+  }
+);
+
 // Update user goal
 export const updateCarItem = createAsyncThunk(
   'carItems/update',
@@ -50,6 +61,19 @@ export const carItemSlice = createSlice({
         state.carItems = action.payload
       })
       .addCase(getCarItems.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(createCarItem.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createCarItem.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.carItems.push(action.payload);
+      })
+      .addCase(createCarItem.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

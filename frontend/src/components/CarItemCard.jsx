@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateCarItem, getCarItems, reset } from '../features/carItems/carItemSlice'
+import { useDispatch } from 'react-redux';
+import { updateCarItem, getCarItems } from '../features/carItems/carItemSlice'
 
 
 
@@ -10,7 +10,7 @@ function CarItemCard({ carItem }) {
 
   const [carStatus, setCarStatus] = useState(carItem.carAvailable);
   const dispatch = useDispatch();
-  
+
   const rentCar = async () => {
     let rentCarReq = {
       itemId: carItem._id,
@@ -21,7 +21,7 @@ function CarItemCard({ carItem }) {
     await setCarStatus(carItem.carAvailable);
   };
 
-  const returnCar = async() => {
+  const returnCar = async () => {
     let returnCarReq = {
       itemId: carItem._id,
       availableUpdate: true,

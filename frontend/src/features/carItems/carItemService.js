@@ -12,6 +12,13 @@ const getCarItems = async() => {
   return response.data;
 }
 
+// Create new Car Item
+const createCarItem = async(carItemData) => {
+  console.log(carItemData);
+  const response = await axios.post(API_URL, carItemData);
+  return response.data;
+}
+
 // Update car items
 const updateCarItem = async(itemId, status) => {
   // Config
@@ -24,7 +31,7 @@ const updateCarItem = async(itemId, status) => {
 
 const carItemService = {
   getCarItems,
-  updateCarItem
+  updateCarItem, createCarItem
 }
 
 export default carItemService;

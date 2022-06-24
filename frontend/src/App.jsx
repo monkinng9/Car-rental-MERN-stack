@@ -4,6 +4,7 @@ import './App.css';
 import { getCarItems, reset } from './features/carItems/carItemSlice';
 import Spinner from './components/Spinner';
 import CarItemCard from './components/CarItemCard';
+import AddCarItemForm from './components/AddCarItemForm'
 
 
 
@@ -32,6 +33,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Add Car Item</h1>
+        <div className="p-3"><AddCarItemForm /></div>
         {carItems.length > 0 ? (
           <h3>
             {carItems.map(carItem =>
