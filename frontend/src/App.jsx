@@ -18,7 +18,7 @@ function App() {
 
 
   const [filteredCarItems, setFilteredCarItems] = useState([]);
-  const [carStatus, setCarStatus] = useState('แสดงทั้งหมด')
+  const [carStatusFilter, setCarStatusFilter] = useState('แสดงทั้งหมด')
 
   useEffect(() => {
     setFilteredCarItems(carItems);
@@ -36,7 +36,7 @@ function App() {
   }, [isError, message, dispatch]);
 
   useEffect(() => {
-    if (carStatus === 'true') {
+    if (carStatusFilter === 'true') {
       const result = [];
       for (let item of carItems) {
         if (item.carAvailable === true) {
@@ -45,7 +45,7 @@ function App() {
         }
       }
     }
-    if (carStatus === 'false') {
+    if (carStatusFilter === 'false') {
       const result = [];
       for (let item of carItems) {
         if (item.carAvailable === false) {
@@ -54,15 +54,15 @@ function App() {
         }
       }
     }
-    if (carStatus === 'แสดงทั้งหมด') {
+    if (carStatusFilter === 'แสดงทั้งหมด') {
       setFilteredCarItems(carItems);
     }
-  }, [carStatus]);
+  }, [carStatusFilter]);
 
 
   const filterHandle = async (e) => {
     e.preventDefault();
-    setCarStatus(e.target.value);
+    setCarStatusFilter(e.target.value);
   }
 
   if (isLoading) {
