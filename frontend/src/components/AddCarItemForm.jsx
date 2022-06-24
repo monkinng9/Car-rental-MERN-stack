@@ -2,21 +2,31 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { createCarItem } from '../features/carItems/carItemSlice'
+import { createCarItem } from '../features/carItems/carItemSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddCarItemForm() {
   const dispatch = useDispatch();
-  
-  
+
+
   const [carID, setCarID] = useState('');
   const [typeOfCar, setTypeOfCar] = useState('');
 
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (typeOfCar === ''
-      || typeOfCar === 'เลือกประเภทรถ' ) {
-        console.log('Not define type of car.')
+      || typeOfCar === 'เลือกประเภทรถ') {
+        toast.warn('ควยเลือกประเภทสิวะ', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
     } else {
       let createCarReq = {
         carID: carID,
@@ -58,6 +68,17 @@ function AddCarItemForm() {
           Submit
         </Button>
       </Form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
     </>
   )
