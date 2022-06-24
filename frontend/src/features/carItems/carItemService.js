@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = '/api/car-item/'
 
 // Get car items
-const getCarItems = async() => {
+const getCarItems = async () => {
   // Config
 
   // Response
@@ -13,25 +13,35 @@ const getCarItems = async() => {
 }
 
 // Create new Car Item
-const createCarItem = async(carItemData) => {
-  console.log(carItemData);
+const createCarItem = async (carItemData) => {
   const response = await axios.post(API_URL, carItemData);
   return response.data;
 }
 
-// Update car items
-const updateCarItem = async(itemId, status) => {
+// Update car item
+const updateCarItem = async (itemId, status) => {
   // Config
 
   // Response
-  const response = await axios.put(API_URL + itemId, {carAvailable:status});
+  const response = await axios.put(API_URL + itemId, { carAvailable: status });
 
+  return response.data;
+}
+
+// Delete car Item
+const deleteCarItem = async (itemId) => {
+  // Config
+
+  // Response
+  const response = await axios.delete(API_URL + itemId);
   return response.data;
 }
 
 const carItemService = {
   getCarItems,
-  updateCarItem, createCarItem
+  updateCarItem,
+  createCarItem,
+  deleteCarItem
 }
 
 export default carItemService;

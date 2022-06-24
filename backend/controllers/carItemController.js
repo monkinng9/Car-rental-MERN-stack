@@ -42,7 +42,12 @@ const updateCarItem = asyncHandler(async (req, res) => {
 })
 
 const deleteCarItem = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete car item ${req.params.id}` });
+
+  const carItem = await CarItem.findById(req.params.id);
+
+  await carItem.remove()
+
+  res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { updateCarItem, getCarItems } from '../features/carItems/carItemSlice'
+import { updateCarItem, getCarItems, deleteCarItem } from '../features/carItems/carItemSlice';
+import CloseButton from 'react-bootstrap/CloseButton';
+
 
 
 
@@ -31,6 +33,10 @@ function CarItemCard({ carItem }) {
     dispatch(getCarItems());
     // window.location.reload(false);
   };
+
+  const deleteCar = async () => {
+    dispatch(deleteCarItem(carItem._id));
+  }
   return (
     <Card className="mb-4" style={{ width: '30rem' }}>
       <Card.Body>
@@ -44,6 +50,7 @@ function CarItemCard({ carItem }) {
             onClick={rentCar}>ยืมรถ</Button>)
           : (<Button variant="warning" style={{ fontSize: 20 }}
             onClick={returnCar}>คืนรถ</Button>)}
+        <CloseButton className="ms-3 btn-sm" onClick={deleteCar}/>
       </Card.Body>
     </Card>
   )

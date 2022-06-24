@@ -31,16 +31,27 @@ export const createCarItem = createAsyncThunk(
   }
 );
 
-// Update user goal
+// Update Car Item
 export const updateCarItem = createAsyncThunk(
   'carItems/update',
   async (reqForm, thunkAPI) => {
     // Get token
 
     // Use service
-    let itemId = reqForm['itemId'];
+    let itemID = reqForm['itemId'];
     let status = reqForm['availableUpdate'];
-    return await carItemService.updateCarItem(itemId, status);
+    return await carItemService.updateCarItem(itemID, status);
+  }
+);
+
+// Delete Car Item
+export const deleteCarItem = createAsyncThunk(
+  'carItems/delete',
+  async (itemID, thunkAPI) => {
+    // Get token
+
+    // Use service
+    return await carItemService.deleteCarItem(itemID);
   }
 );
 
@@ -87,6 +98,21 @@ export const carItemSlice = createSlice({
         state.goals = action.payload
       })
       .addCase(updateCarItem.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(deleteCarItem.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteCarItem.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.carItems = state.carItems.filter(
+          (carItem) => carItem._id !== action.payload.id
+        )
+      })
+      .addCase(deleteCarItem.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
