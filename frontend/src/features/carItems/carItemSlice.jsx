@@ -20,6 +20,19 @@ export const getCarItems = createAsyncThunk(
   }
 );
 
+// Update user goal
+export const updateCarItem = createAsyncThunk(
+  'carItems/update',
+  async (reqForm, thunkAPI) => {
+    // Get token
+
+    // Use service
+    let itemId = reqForm['itemId'];
+    let status = reqForm['availableUpdate'];
+    return await carItemService.updateCarItem(itemId, status);
+  }
+);
+
 export const carItemSlice = createSlice({
   name: 'carItem',
   initialState,
@@ -37,6 +50,19 @@ export const carItemSlice = createSlice({
         state.carItems = action.payload
       })
       .addCase(getCarItems.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(updateCarItem.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateCarItem.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.goals = action.payload
+      })
+      .addCase(updateCarItem.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

@@ -1,26 +1,49 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCarItem, getCarItems, reset } from '../features/carItems/carItemSlice'
+
 
 
 function CarItemCard({ carItem }) {
 
-  const rentCar = () => {};
+  const [carStatus, setCarStatus] = useState(carItem.carAvailable);
+  const dispatch = useDispatch();
+  
+  const rentCar = async () => {
+    let rentCarReq = {
+      itemId: carItem._id,
+      availableUpdate: false,
+    }
+    await dispatch(updateCarItem(rentCarReq));
+    await dispatch(getCarItems());
+    await setCarStatus(carItem.carAvailable);
+  };
 
+  const returnCar = async() => {
+    let returnCarReq = {
+      itemId: carItem._id,
+      availableUpdate: true,
+    }
+    setCarStatus(true);
+    await dispatch(updateCarItem(returnCarReq));
+    dispatch(getCarItems());
+    // window.location.reload(false);
+  };
   return (
     <Card className="mb-4" style={{ width: '30rem' }}>
       <Card.Body>
         <Card.Title>{carItem.carID}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{carItem.carType}</Card.Subtitle>
         <Card.Text style={{ fontSize: 24 }}>
-          {carItem.carAvailable === true ? (<>ว่าง</>) : (<>ไม่ว่าง</>)}
+          {carStatus === true ? (<>ว่าง</>) : (<>ไม่ว่าง</>)}
         </Card.Text>
-        {carItem.carAvailable === true ? 
-          (<Button variant="primary" onClick={rentCar} 
-            style={{ fontSize: 20 }}>ยืมรถ</Button>) 
-          : (<Button variant="warning" onClick={rentCar} 
-            style={{ fontSize: 24 }}>คืนรถ</Button>)}
-        
+        {carStatus === true ?
+          (<Button variant="success" style={{ fontSize: 20 }}
+            onClick={rentCar}>ยืมรถ</Button>)
+          : (<Button variant="warning" style={{ fontSize: 20 }}
+            onClick={returnCar}>คืนรถ</Button>)}
       </Card.Body>
     </Card>
   )

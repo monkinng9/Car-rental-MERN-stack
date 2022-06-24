@@ -12,8 +12,19 @@ const getCarItems = async() => {
   return response.data;
 }
 
+// Update car items
+const updateCarItem = async(itemId, status) => {
+  // Config
+
+  // Response
+  const response = await axios.put(API_URL + itemId, {carAvailable:status});
+
+  return response.data;
+}
+
 const carItemService = {
   getCarItems,
+  updateCarItem
 }
 
 export default carItemService;
