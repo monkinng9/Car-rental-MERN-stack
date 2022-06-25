@@ -35,7 +35,6 @@ function Dashboard() {
         dispatch(getCarItems());
       }
       if (isError) {
-        console.log(message);
       }
       return () => {
         dispatch(reset());
@@ -46,10 +45,8 @@ function Dashboard() {
   );
 
   useEffect(() => {
-    setCarItemList(carItems);
     const result = [];
     if (carStatusFilter === 'true') {
-      console.log("filter รถว่าง");
       for (let item of carItems) {
         if (item.carAvailable === true) {
           result.push(item);
@@ -57,7 +54,6 @@ function Dashboard() {
         }
       }
     } else if (carStatusFilter === 'false') {
-      console.log("filter รถไม่ว่าง")
       for (let item of carItems) {
         if (item.carAvailable === false) {
           result.push(item);
@@ -79,7 +75,7 @@ function Dashboard() {
   if (isLoading) {
     return <Spinner />;
   }
-  
+
   return (
     <div>
       <header className="App-header">
