@@ -42,11 +42,15 @@ const updateCarItem = async (itemId, status, token) => {
 }
 
 // Delete car Item
-const deleteCarItem = async (itemId) => {
+const deleteCarItem = async (itemId, token) => {
   // Config
-
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  }
   // Response
-  const response = await axios.delete(API_URL + itemId);
+  const response = await axios.delete(API_URL + itemId, config);
   return response.data;
 }
 

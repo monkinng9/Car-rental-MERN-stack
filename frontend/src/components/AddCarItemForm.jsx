@@ -18,7 +18,7 @@ function AddCarItemForm() {
 
     if (typeOfCar === ''
       || typeOfCar === 'เลือกประเภทรถ') {
-        toast.warn('ควยเลือกประเภทสิวะ', {
+        toast.warn('กรุณาเลือกประเภทรถ', {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -34,6 +34,15 @@ function AddCarItemForm() {
       }
 
       await dispatch(createCarItem(createCarReq));
+      toast.warn('ได้ทำการเพิ่มรถแล้ว', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
 
   }

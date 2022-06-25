@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCarItems, reset } from '../features/carItems/carItemSlice';
+import { getCarItems, reset } from '../../features/carItems/carItemSlice';
 import { useNavigate } from 'react-router-dom';
-import AddCarItemForm from '../components/AddCarItemForm';
+import AddCarItemForm from '../../components/AddCarItemForm';
 import { FaSignOutAlt } from 'react-icons/fa';
-import { logout } from '../features/auth/authSlice';
-import Spinner from '../components/Spinner';
+import { logout } from '../../features/auth/authSlice';
+import Spinner from '../../components/Spinner';
 import Form from 'react-bootstrap/Form';
-import CarItemCard from '../components/CarItemCard';
+import CarItemCard from '../../components/CarItemCard';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ function Dashboard() {
 
   const { carItems, isLoading, isError, message } = useSelector((state) => state.carItems);
 
-  const [carItemList, setCarItemList] = useState([]);
   const [filteredCarItems, setFilteredCarItems] = useState([]);
   const [carStatusFilter, setCarStatusFilter] = useState('แสดงทั้งหมด');
 
@@ -80,9 +79,7 @@ function Dashboard() {
     <div>
       <header className="App-header">
         <h1>Add Car Item</h1>
-        <div className="p-3">
-          <AddCarItemForm />
-        </div>
+        
         <hr />
         <Form.Select style={{ width: 200 }} onChange={filterHandle}>
           <option>แสดงทั้งหมด</option>
