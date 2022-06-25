@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, reset } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
@@ -61,7 +61,7 @@ function Login() {
 				<div className="Auth-form-content">
 					<h3 className="Auth-form-title">Sign In</h3>
 					<div className="text-center">
-						Not registered yet? <span className="link-primary">Sign Up</span>
+						Not registered yet? <Link to='/register' className="link-primary">Sign Up</Link>
 					</div>
 					<div className="form-group mt-3">
 						<label>Email address</label>
