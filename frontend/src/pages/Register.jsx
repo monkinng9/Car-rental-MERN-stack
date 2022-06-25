@@ -65,7 +65,7 @@ function Register() {
 				<div className="Auth-form-content">
 					<h3 className="Auth-form-title">Sign Up</h3>
 					<div className="text-center">
-						Already registered? <span className="link-primary">Sign In</span>
+						Already registered? <span className="link-primary" >Sign In</span>
 					</div>
 					<div className="form-group mt-3">
 						<label>Full Name</label>
