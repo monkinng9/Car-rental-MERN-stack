@@ -14,6 +14,11 @@ const createCarItem = asyncHandler(async (req, res) => {
     throw new Error('Please add a ID car and type of car');
   }
 
+  if(req.user.role != 'admin') {
+    res.status(400);
+    throw new Error('This function available for admin.');
+  }
+
   const carItem = await CarItem.create({
     carID: req.body.carID,
     carType: req.body.carType,
@@ -42,6 +47,11 @@ const updateCarItem = asyncHandler(async (req, res) => {
 })
 
 const deleteCarItem = asyncHandler(async (req, res) => {
+
+  if(req.user.role != 'admin') {
+    res.status(400);
+    throw new Error('This function available for admin.');
+  }
 
   const carItem = await CarItem.findById(req.params.id);
 
