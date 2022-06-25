@@ -13,12 +13,6 @@ function CarItemCard({ carItem }) {
   const [carStatus, setCarStatus] = useState(carItem.carAvailable);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      dispatch(reset());
-    }
-  },[dispatch])
-
   const rentCar = async () => {
     let rentCarReq = {
       itemId: carItem._id,
