@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const API_URL = '/api/car-item/'
+const API_URL_END_USER = '/api/end-user/car-item/'
+const API_URL_ADMIN = '/api/car-item/'
 
 // Get car items
 const getCarItems = async (token) => {
@@ -23,12 +25,12 @@ const createCarItem = async (carItemData, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const response = await axios.post(API_URL, carItemData, config);
+  const response = await axios.post(API_URL_ADMIN, carItemData, config);
   return response.data;
 }
 
 // Update car item
-const updateCarItem = async (itemId, status, token) => {
+const rentCarItem = async (itemId, status, token) => {
   // Config
   const config = {
     headers: {
@@ -36,7 +38,7 @@ const updateCarItem = async (itemId, status, token) => {
     },
   }
   // Response
-  const response = await axios.put(API_URL + itemId, { carAvailable: status }, config);
+  const response = await axios.put(API_URL_END_USER + '/rent/' + itemId, { carAvailable: status }, config);
 
   return response.data;
 }
@@ -50,13 +52,13 @@ const deleteCarItem = async (itemId, token) => {
     },
   }
   // Response
-  const response = await axios.delete(API_URL + itemId, config);
+  const response = await axios.delete(API_URL_ADMIN + itemId, config);
   return response.data;
 }
 
 const carItemService = {
   getCarItems,
-  updateCarItem,
+  rentCarItem,
   createCarItem,
   deleteCarItem
 }

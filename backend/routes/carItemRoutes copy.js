@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getCarItems, createCarItem, 
-  updateCarItem, deleteCarItem } = require('../controllers/carItemController');
+const { getCarItems } = require('../controllers/carItemController.all');
 const { protect } = require('../middleware/authMiddleware');
 
 

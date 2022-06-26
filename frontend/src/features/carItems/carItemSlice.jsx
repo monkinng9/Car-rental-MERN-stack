@@ -38,14 +38,14 @@ export const createCarItem = createAsyncThunk('carItems/create', async (carItemD
 });
 
 // Update Car Item
-export const updateCarItem = createAsyncThunk('carItems/update', async (reqForm, thunkAPI) => {
+export const rentCarItem = createAsyncThunk('carItems/update', async (reqForm, thunkAPI) => {
 	try {
 		// Get token
 		const token = thunkAPI.getState().auth.user.token;
 		// Use service
 		let itemID = reqForm['itemId'];
 		let status = reqForm['availableUpdate'];
-		return await carItemService.updateCarItem(itemID, status, token);
+		return await carItemService.rentCarItem(itemID, status, token);
 	} catch (error) {
 		const message =
 			(error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -101,15 +101,15 @@ export const carItemSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 			})
-			.addCase(updateCarItem.pending, (state) => {
+			.addCase(rentCarItem.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(updateCarItem.fulfilled, (state, action) => {
+			.addCase(rentCarItem.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.goals = action.payload;
 			})
-			.addCase(updateCarItem.rejected, (state, action) => {
+			.addCase(rentCarItem.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

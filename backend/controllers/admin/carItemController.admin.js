@@ -1,12 +1,20 @@
 const asyncHandler = require('express-async-handler');
-const CarItem = require('../models/carItemModel');
+const CarItem = require('../../models/carItemModel');
 
+// @availabale  End-user & Admin
+// @desc        Get Car
+// @route       GET /api/car-item/
+// @access      Private
 const getCarItems = asyncHandler(async (req, res) => {
   const carItems = await CarItem.find();
   
   res.status(200).json(carItems);
 });
 
+// @availabale  Admin
+// @desc        Create Car
+// @route       POST /api/admin/car-item
+// @access      Private
 const createCarItem = asyncHandler(async (req, res) => {
 
   if(!req.body.carID || !req.body.carType) {
@@ -29,6 +37,10 @@ const createCarItem = asyncHandler(async (req, res) => {
 
 })
 
+// @availabale  End-user
+// @desc        Create Car
+// @route       POST /api/admin/car-item
+// @access      Private
 const updateCarItem = asyncHandler(async (req, res) => {
   const carItem = await CarItem.findById(req.params.id);
   
@@ -40,9 +52,7 @@ const updateCarItem = asyncHandler(async (req, res) => {
   const updateCarItem 
     = await CarItem
         .findByIdAndUpdate(req.params.id, req.body, {new: true});
-      
-  
-  
+        
   res.status(200).json({ message: `Update car item ${req.params.id}` });
 })
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { updateCarItem, getCarItems, deleteCarItem } from '../features/carItems/carItemSlice';
+import { rentCarItem, getCarItems, deleteCarItem } from '../features/carItems/carItemSlice';
 import CloseButton from 'react-bootstrap/CloseButton';
 
 
@@ -22,7 +22,7 @@ function CarItemCard({ carItem }) {
       itemId: carItem._id,
       availableUpdate: false,
     }
-    await dispatch(updateCarItem(rentCarReq));
+    await dispatch(rentCarItem(rentCarReq));
     await dispatch(getCarItems());
   };
 
@@ -32,7 +32,7 @@ function CarItemCard({ carItem }) {
       availableUpdate: true,
     }
     setCarStatus(true);
-    await dispatch(updateCarItem(returnCarReq));
+    await dispatch(rentCarItem(returnCarReq));
     dispatch(getCarItems());
     // window.location.reload(false);
   };
