@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { rentCarItem, getCarItems } from '../features/carItems/carItemSlice';
+import { rentCarItem, getCarItems } from '../../features/carItems/carItemSlice';
 
 
 

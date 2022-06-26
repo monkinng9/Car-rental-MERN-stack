@@ -6,7 +6,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../../features/auth/authSlice';
 import Spinner from '../../components/Spinner';
 import Form from 'react-bootstrap/Form';
-import CarItemCard from '../../components/CarItemCardEndUser';
+import CarItemCard from '../../components/end-user/CarItemCardEndUser';
 
 function DashboardEndUser() {
   const navigate = useNavigate();

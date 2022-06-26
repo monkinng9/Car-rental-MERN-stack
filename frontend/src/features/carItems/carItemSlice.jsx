@@ -37,7 +37,7 @@ export const createCarItem = createAsyncThunk('carItems/create', async (carItemD
 	}
 });
 
-// Update Car Item
+// Rent Car Item
 export const rentCarItem = createAsyncThunk('carItems/update', async (reqForm, thunkAPI) => {
 	try {
 		// Get token
@@ -46,6 +46,22 @@ export const rentCarItem = createAsyncThunk('carItems/update', async (reqForm, t
 		let itemID = reqForm['itemId'];
 		let status = reqForm['availableUpdate'];
 		return await carItemService.rentCarItem(itemID, status, token);
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
+
+// update Car Item
+export const updateCarItem = createAsyncThunk('carItems/update', async (reqForm, thunkAPI) => {
+	try {
+		// Get token
+		const token = thunkAPI.getState().auth.user.token;
+		// Use service
+		let itemID = reqForm['itemId'];
+    console.log(itemID);
+		return await carItemService.updateCarItem(itemID, reqForm, token);
 	} catch (error) {
 		const message =
 			(error.response && error.response.data && error.response.data.message) || error.message || error.toString();

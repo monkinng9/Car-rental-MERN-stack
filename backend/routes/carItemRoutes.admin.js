@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { getCarItems } = require('../controllers/carItemController.all');
-const {deleteCarItem} = require('../controllers/admin/carItemController.admin');
+const {deleteCarItem, createCarItem, updateCarItem} = require('../controllers/admin/carItemController.admin');
 const { protect } = require('../middleware/authMiddleware');
 
-router.get('/', protect, getCarItems);
+router.post('/car/', protect, createCarItem);
 
-router.delete('/:id', protect, deleteCarItem);
+router.delete('/car/:id', protect, deleteCarItem);
 
-
+router.put('/car/:id', protect, updateCarItem);
 
 module.exports = router;

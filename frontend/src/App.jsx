@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import AddCarItemPageAdmin from './pages/admin/AddCarItemPageAdmin';
 import CarDashboardAdmin from './pages/admin/CarDashboardAdmin';
 import LandingPage from './pages/LandingPage';
+import EditCarForm from './pages/admin/EditCarFrom'
 
 
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='admin'>
               <Route path='cardashboard' element={<CarDashboardAdmin />}></Route>
               <Route path='addcar' element={<AddCarItemPageAdmin />}></Route>
+              <Route path='editcar/:itemId/:carID/:carType' element={<EditCarForm />}></Route>
             </Route>
           </Routes>
         </div>

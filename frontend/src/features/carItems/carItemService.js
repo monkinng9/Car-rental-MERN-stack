@@ -25,11 +25,11 @@ const createCarItem = async (carItemData, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const response = await axios.post(API_URL_ADMIN, carItemData, config);
+  const response = await axios.post(API_URL_ADMIN + '/car/', carItemData, config);
   return response.data;
 }
 
-// Update car item
+// Rent car item
 const rentCarItem = async (itemId, status, token) => {
   // Config
   const config = {
@@ -43,6 +43,20 @@ const rentCarItem = async (itemId, status, token) => {
   return response.data;
 }
 
+// Update car item
+const updateCarItem = async (itemId, body, token) => {
+  // Config
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  }
+  // Response
+  const response = await axios.put(API_URL_ADMIN + '/car/' + itemId, body, config);
+
+  return response.data;
+}
+
 // Delete car Item
 const deleteCarItem = async (itemId, token) => {
   // Config
@@ -52,7 +66,7 @@ const deleteCarItem = async (itemId, token) => {
     },
   }
   // Response
-  const response = await axios.delete(API_URL_ADMIN + itemId, config);
+  const response = await axios.delete(API_URL_ADMIN + '/car/' + itemId, config);
   return response.data;
 }
 
@@ -60,7 +74,8 @@ const carItemService = {
   getCarItems,
   rentCarItem,
   createCarItem,
-  deleteCarItem
+  deleteCarItem,
+  updateCarItem
 }
 
 export default carItemService;

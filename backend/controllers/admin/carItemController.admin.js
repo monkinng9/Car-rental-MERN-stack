@@ -30,7 +30,7 @@ const createCarItem = asyncHandler(async (req, res) => {
 
 // @availabale  Admin
 // @desc        Create Car
-// @route       POST /api/admin/car-item
+// @route       PUT /api/admin/car-item/car/:id (approved!)
 // @access      Private
 const updateCarItem = asyncHandler(async (req, res) => {
   const carItem = await CarItem.findById(req.params.id);
@@ -45,16 +45,14 @@ const updateCarItem = asyncHandler(async (req, res) => {
     throw new Error('This function available for admin.');
   }
 
-  const updateCarItem 
-    = await CarItem
-        .findByIdAndUpdate(req.params.id, req.body, {new: true});
+  const updateCarItem = await CarItem.findByIdAndUpdate(req.params.id, req.body, {new: true});
         
   res.status(200).json({ message: `Update car item ${req.params.id}` });
 })
 
 // @availabale  Admin
 // @desc        Delete Car 
-// @route       DELETE /api/admin/car-item/:id
+// @route       DELETE /api/admin/car-item/car/:id
 // @access      Private
 const deleteCarItem = asyncHandler(async (req, res) => {
 

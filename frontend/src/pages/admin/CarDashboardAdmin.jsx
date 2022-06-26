@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getCarItems, reset } from '../../features/carItems/carItemSlice';
 import { logout } from '../../features/auth/authSlice';
 import { FaSignOutAlt } from 'react-icons/fa';
-import CarItemCardAdmin from './../../components/CarItemCardAdmin';
+import CarItemCardAdmin from './../../components/admin/CarItemCardAdmin';
 import Spinner from '../../components/Spinner';
 
 
@@ -46,7 +46,7 @@ function CarDashboardAdmin() {
   return (
     <div>
       <header className="App-header">
-      <h1>Admin: Car Item</h1>
+      <h1>Admin: Car Item {"  "} <span><Link to="/admin/addcar">เพิ่มรถ</Link></span></h1>
         {carItems.length > 0 ? (
           <h3>{carItems.map((item) =>
             <CarItemCardAdmin key={item._id} carItem={item} />)}</h3>

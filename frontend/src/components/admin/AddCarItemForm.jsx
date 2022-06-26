@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { createCarItem } from '../features/carItems/carItemSlice';
+import { createCarItem } from '../../features/carItems/carItemSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,7 +17,8 @@ function AddCarItemForm() {
     e.preventDefault();
 
     if (typeOfCar === ''
-      || typeOfCar === 'เลือกประเภทรถ') {
+      || typeOfCar === 'เลือกประเภทรถ'
+      || !typeOfCar) {
         toast.warn('กรุณาเลือกประเภทรถ', {
           position: "top-center",
           autoClose: 5000,
@@ -32,7 +33,6 @@ function AddCarItemForm() {
         carID: carID,
         carType: typeOfCar,
       }
-
       await dispatch(createCarItem(createCarReq));
       toast.warn('ได้ทำการเพิ่มรถแล้ว', {
         position: "top-center",
@@ -43,14 +43,17 @@ function AddCarItemForm() {
         draggable: true,
         progress: undefined,
         });
+        setCarID('');
     }
 
   }
+
+  console.log(typeOfCar);
+
   return (
     <>
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>ทะเบียนรถ</Form.Label>
           <Form.Control type="text"
             placeholder="กรอกทะเบียนรถ" value={carID}
             onChange={(e) => setCarID(e.target.value)}
