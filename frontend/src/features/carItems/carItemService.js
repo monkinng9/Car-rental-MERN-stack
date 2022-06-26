@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = '/api/car-item/'
 const API_URL_END_USER = '/api/end-user/car-item/'
-const API_URL_ADMIN = '/api/car-item/'
+const API_URL_ADMIN = '/api/admin/car-item/'
 
 // Get car items
 const getCarItems = async (token) => {
