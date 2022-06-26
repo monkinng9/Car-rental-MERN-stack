@@ -3,7 +3,7 @@ const CarItem = require('../../models/carItemModel');
 
 // @availabale  End-user
 // @desc        Rent Car
-// @route       PUT /api/end-user/car-item/:id
+// @route       PUT /api/end-user/car-item/rent/:id
 // @access      Private
 const rentCarItem = asyncHandler(async (req, res) => {
   const carItem = await CarItem.findById(req.params.id);
@@ -22,8 +22,6 @@ const rentCarItem = asyncHandler(async (req, res) => {
     = await CarItem
         .findByIdAndUpdate(req.params.id, req.body, {new: true});
       
-  
-  
   res.status(200).json({ message: `Update car item ${req.params.id}` });
 })
 

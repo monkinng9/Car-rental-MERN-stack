@@ -1,15 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const CarItem = require('../../models/carItemModel');
 
-// @availabale  End-user & Admin
-// @desc        Get Car
-// @route       GET /api/car-item/
-// @access      Private
-const getCarItems = asyncHandler(async (req, res) => {
-  const carItems = await CarItem.find();
-  
-  res.status(200).json(carItems);
-});
 
 // @availabale  Admin
 // @desc        Create Car
@@ -37,7 +28,7 @@ const createCarItem = asyncHandler(async (req, res) => {
 
 })
 
-// @availabale  End-user
+// @availabale  Admin
 // @desc        Create Car
 // @route       POST /api/admin/car-item
 // @access      Private
@@ -47,6 +38,11 @@ const updateCarItem = asyncHandler(async (req, res) => {
   if(!carItem) {
     res.status(400);
     throw new Error('Car not foud!');
+  }
+
+  if(req.user.role != 'admin') {
+    res.status(400);
+    throw new Error('This function available for admin.');
   }
 
   const updateCarItem 
@@ -71,5 +67,5 @@ const deleteCarItem = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-  getCarItems, createCarItem, updateCarItem, deleteCarItem
+  createCarItem, updateCarItem, deleteCarItem
 }

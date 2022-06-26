@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { rentCarItem, getCarItems, deleteCarItem } from '../features/carItems/carItemSlice';
-import CloseButton from 'react-bootstrap/CloseButton';
+import { rentCarItem, getCarItems } from '../features/carItems/carItemSlice';
 
 
 
 
-function CarItemCard({ carItem }) {
+function CarItemCardEndUser({ carItem }) {
 
   const [carStatus, setCarStatus] = useState(carItem.carAvailable);
   const dispatch = useDispatch();
@@ -34,12 +33,8 @@ function CarItemCard({ carItem }) {
     setCarStatus(true);
     await dispatch(rentCarItem(returnCarReq));
     dispatch(getCarItems());
-    // window.location.reload(false);
   };
 
-  const deleteCar = async () => {
-    dispatch(deleteCarItem(carItem._id));
-  }
   return (
     <Card className="mb-4" style={{ width: '30rem' }}>
       <Card.Body>
@@ -53,10 +48,9 @@ function CarItemCard({ carItem }) {
             onClick={rentCar}>ยืมรถ</Button>)
           : (<Button variant="warning" style={{ fontSize: 20 }}
             onClick={returnCar}>คืนรถ</Button>)}
-        <CloseButton className="ms-3 btn-sm" onClick={deleteCar}/>
       </Card.Body>
     </Card>
   )
 }
 
-export default CarItemCard
+export default CarItemCardEndUser

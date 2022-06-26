@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCarItems, reset } from '../../features/carItems/carItemSlice';
 import { useNavigate } from 'react-router-dom';
-import AddCarItemForm from '../../components/AddCarItemForm';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../../features/auth/authSlice';
 import Spinner from '../../components/Spinner';
 import Form from 'react-bootstrap/Form';
-import CarItemCard from '../../components/CarItemCard';
+import CarItemCard from '../../components/CarItemCardEndUser';
 
-function Dashboard() {
+function DashboardEndUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,7 +22,7 @@ function Dashboard() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate('/');
+    navigate('/login');
   };
 
   useEffect(
@@ -78,8 +77,7 @@ function Dashboard() {
   return (
     <div>
       <header className="App-header">
-        <h1>Add Car Item</h1>
-        
+        <h1>End-user: Add Car Item</h1>
         <hr />
         <Form.Select style={{ width: 200 }} onChange={filterHandle}>
           <option>แสดงทั้งหมด</option>
@@ -88,17 +86,19 @@ function Dashboard() {
         </Form.Select>
         <hr />
         {filteredCarItems.length > 0 ? (
-					<h3>{filteredCarItems.map((item) => 
+          <h3>{filteredCarItems.map((item) =>
             <CarItemCard key={item._id} carItem={item} />)}</h3>
-				) : (
-					<h3>You don't have any car items yet</h3>
-				)}
+        ) : (
+          <h3>You don't have any car items yet</h3>
+        )}
         <button className="btn" onClick={onLogout}>
           <FaSignOutAlt />Logout
         </button>
       </header>
+
     </div>
+
   );
 }
 
-export default Dashboard;
+export default DashboardEndUser;
