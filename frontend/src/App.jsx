@@ -1,12 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import DashboardEndUser from './pages/end-user/DashboardEndUser';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import LandingPage from './pages/LandingPage';
 import AddCarItemPageAdmin from './pages/admin/AddCarItemPageAdmin';
 import CarDashboardAdmin from './pages/admin/CarDashboardAdmin';
-import LandingPage from './pages/LandingPage';
 import EditCarForm from './pages/admin/EditCarFrom'
+import DashboardEndUser from './pages/end-user/DashboardEndUser';
+import BorrowCarForm from './pages/end-user/BorrowCarForm'
+import ConfirmBorrow from './pages/end-user/ConfirmBorrow';
 
 
 
@@ -23,6 +25,8 @@ function App() {
             <Route path='login' element={<Login />}></Route>
             <Route path='end-user'>
               <Route path='cardashboard' element={<DashboardEndUser />}></Route>
+              <Route path='cardashboard/borrowCarForm/:itemId' element={<BorrowCarForm />}></Route>
+              <Route path='cardashboard/borrowCarForm/confirm' element={<ConfirmBorrow />}></Route>
             </Route>
             <Route path='admin'>
               <Route path='cardashboard' element={<CarDashboardAdmin />}></Route>

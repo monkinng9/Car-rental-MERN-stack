@@ -3,26 +3,24 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { rentCarItem, getCarItems } from '../../features/carItems/carItemSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 function CarItemCardEndUser({ carItem }) {
-
-  const [carStatus, setCarStatus] = useState(carItem.carAvailable);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  
+  const [carStatus, setCarStatus] = useState(carItem.carAvailable);
 
   useEffect(() => {
     setCarStatus(carItem.carAvailable)
   }, [carItem.carAvailable],)
 
   const rentCar = async () => {
-    let rentCarReq = {
-      itemId: carItem._id,
-      availableUpdate: false,
-    }
-    await dispatch(rentCarItem(rentCarReq));
-    await dispatch(getCarItems());
+    navigate(`/end-user/cardashboard/borrowCarForm/${carItem._id}`)
   };
 
   const returnCar = async () => {

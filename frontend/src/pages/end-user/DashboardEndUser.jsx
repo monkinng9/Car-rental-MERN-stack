@@ -74,6 +74,8 @@ function DashboardEndUser() {
     return <Spinner />;
   }
 
+  console.log('Render DashboardEndUser');
+
   return (
     <div>
       <header className="App-header">
