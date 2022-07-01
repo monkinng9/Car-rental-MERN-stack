@@ -43,21 +43,6 @@ const rentCarItem = async (itemId, status, token) => {
   return response.data;
 }
 
-const createBorrowCarform = async (itemId, newDueTime, token) => {
-  // Config
-  const config = {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  }
-  // Response
-  console.log(API_URL_END_USER + 'rentCarForm/' + itemId);
-  const response = await axios.post(API_URL_END_USER + 'rentCarForm/' + itemId, { dueTime: newDueTime }, config);
-
-  return response.data;
-}
-
-
 // Update car item
 const updateCarItem = async (itemId, body, token) => {
   // Config
@@ -91,7 +76,6 @@ const carItemService = {
   createCarItem,
   deleteCarItem,
   updateCarItem,
-  createBorrowCarform
 }
 
 export default carItemService;

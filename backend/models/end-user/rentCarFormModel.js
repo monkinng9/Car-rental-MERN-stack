@@ -16,6 +16,10 @@ const rentCarFormSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please add a Car ID'],
   },
+  carType: {
+    type: String,
+    require: [true, 'Please add a type of car']
+  },
   status: {
     type: String,
     required: [true, 'Please add a Status value'],

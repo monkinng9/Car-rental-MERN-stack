@@ -48,8 +48,6 @@ function AddCarItemForm() {
 
   }
 
-  console.log(typeOfCar);
-
   return (
     <>
       <Form onSubmit={onSubmit}>

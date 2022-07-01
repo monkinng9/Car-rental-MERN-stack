@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/car-item', require('./routes/carItemRoutes.all'));
-app.use('/api/end-user/car-item', require('./routes/end-user/carItemRoutes.end-user'));
-app.use('/api/admin/car-item', require('./routes/admin/carItemRoutes.admin'));
+app.use('/api/end-user/car-item', require('./routes/end-user/routesEndUser'));
+app.use('/api/admin/car-item', require('./routes/admin/routesAdmin'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 

@@ -20,6 +20,7 @@ function BorrowCarForm() {
   const { carItems, isLoading, isError, message } = useSelector((state) => state.carItems);
 
   const { itemId } = useParams();
+  
   const [carItem, setCarItem] = useState([]);
   const [currentDate, setCurrentDate] = useState();
   const [currentTime, setCurrentTime] = useState();
@@ -110,7 +111,6 @@ function BorrowCarForm() {
     }
   }
 
-  console.log('Render BorrowCarForm');
 
 
   return (

@@ -46,7 +46,6 @@ export const updateCarItem = createAsyncThunk('carItems/update', async (reqForm,
     const token = thunkAPI.getState().auth.user.token;
     // Use service
     let itemID = reqForm['itemId'];
-    console.log(itemID);
     return await carItemService.updateCarItem(itemID, reqForm, token);
   } catch (error) {
     const message =
@@ -87,24 +86,7 @@ export const rentCarItem = createAsyncThunk('carItems/update', async (reqForm, t
   }
 });
 
-// @available   end-user
-// @desc        Create Borrow Car Form
-export const createBorrowCarform = createAsyncThunk('carItems/creatBorrowCarForm', async (reqForm, thunkAPI) => {
-  try {
-    // Get token
-    const token = thunkAPI.getState().auth.user.token;
-    // Use service
-    let carItemID = reqForm['carItemID'];
-    let dueTime = reqForm['dueTime'];
-    console.log(dueTime)
 
-    return await carItemService.createBorrowCarform(carItemID, dueTime, token);
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-});
 
 export const carItemSlice = createSlice({
   name: 'carItem',
@@ -166,19 +148,7 @@ export const carItemSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(createBorrowCarform.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(createBorrowCarform.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.goals = action.payload;
-      })
-      .addCase(createBorrowCarform.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
+      
   }
 });
 

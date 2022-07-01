@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCarItems, reset, rentCarItem, createBorrowCarform } from './../../features/carItems/carItemSlice';
+import { getCarItems, reset, rentCarItem } from './../../features/carItems/carItemSlice';
+import {createBorrowCarform, getBorrowCarForm} from '../../features/borrowCarForm/borrowCarFormSlice'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Spinner from './../../components/Spinner';
@@ -25,9 +26,7 @@ function ConfirmBorrow() {
     navigate('/end-user/cardashboard');
   };
 
-
   const location = useLocation();
-  console.log(location.state);
 
   useEffect(
     () => {
@@ -53,7 +52,6 @@ function ConfirmBorrow() {
   useEffect(() => {
     if(carItem){
       if(carItem.carAvailable === false) {
-        console.log('Car not available')
         setShow(true);
       } else if(carItem.carAvailable === true) {
         let rentCarItemreq = {
@@ -66,8 +64,8 @@ function ConfirmBorrow() {
           dueTime: location.state.dueTime
         }
         dispatch(createBorrowCarform(borrowCarFormReq));
-        console.log('Car available')
-        navigate('/end-user/cardashboard');
+        dispatch(getBorrowCarForm());
+        navigate('/end-user/');
       }
     }
   }, [carItem, navigate]);
@@ -76,7 +74,6 @@ function ConfirmBorrow() {
     return <Spinner />;
   }
 
-  console.log('Render ConfirmBorrow');
 
   return (
     <div>

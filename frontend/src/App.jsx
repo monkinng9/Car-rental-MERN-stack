@@ -9,6 +9,7 @@ import EditCarForm from './pages/admin/EditCarFrom'
 import DashboardEndUser from './pages/end-user/DashboardEndUser';
 import BorrowCarForm from './pages/end-user/BorrowCarForm'
 import ConfirmBorrow from './pages/end-user/ConfirmBorrow';
+import ProfileEndUser from './pages/end-user/ProfileEndUser';
 
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='register' element={<Register />}></Route>
             <Route path='login' element={<Login />}></Route>
             <Route path='end-user'>
+              <Route path='' element={<ProfileEndUser/>}></Route>
               <Route path='cardashboard' element={<DashboardEndUser />}></Route>
               <Route path='cardashboard/borrowCarForm/:itemId' element={<BorrowCarForm />}></Route>
               <Route path='cardashboard/borrowCarForm/confirm' element={<ConfirmBorrow />}></Route>

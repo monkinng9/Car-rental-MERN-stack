@@ -43,7 +43,6 @@ function EditCarFrom() {
     }
   }
 
-  console.log(typeOfCar)
 
   return (
     <div>
