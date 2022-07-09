@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCarItems, reset } from '../../features/carItems/carItemSlice';
-import { getBorrowCarForm } from './../../features/borrowCarForm/borrowCarFormSlice';
+import { getBorrowCarForm } from '../../features/borrowCarForm/borrowCarFormSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { logout } from '../../features/auth/authSlice';
 import Spinner from '../../components/Spinner';
 import Form from 'react-bootstrap/Form';
 import CarItemCard from '../../components/end-user/CarItemCardEndUser';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Navbar from '../../components/navbar/Navbar';
 
 function DashboardEndUser() {
   const navigate = useNavigate();
@@ -17,16 +18,8 @@ function DashboardEndUser() {
   const { carItems, isLoading, isError, message } = useSelector((state) => state.carItems);
   const { borrowForms } = useSelector((state) => state.borrowCarForms);
 
-
-
   const [filteredCarItems, setFilteredCarItems] = useState([]);
   const [carStatusFilter, setCarStatusFilter] = useState('true');
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/login');
-  };
 
   useEffect(
     () => {
@@ -82,32 +75,35 @@ function DashboardEndUser() {
     return <Spinner />;
   }
 
-  console.log(carStatusFilter)
-
   return (
-    <div>
-      <header className="App-header">
-        <h1>End-user: Add Car Item {" "}
-          <span><Link to="/end-user/">Go to Profile</Link></span></h1>
-        <hr />
-        <Form.Select style={{ width: 200 }} onChange={filterHandle} selected='true'>
-          <option value="true">แสดงรถที่ว่าง</option>
-          <option value="แสดงทั้งหมด">แสดงทั้งหมด</option>
-          <option value="false">แสดงรถที่ไม่ว่าง</option>
-        </Form.Select>
-        <hr />
-        {filteredCarItems.length > 0 ? (
-          <h3>{filteredCarItems.map((item) =>
-            <CarItemCard key={item._id} carItem={item} />)}</h3>
-        ) : (
-          <h3>ไม่มีรถที่ว่าง</h3>
-        )}
-        <button className="btn" onClick={onLogout}>
-          <FaSignOutAlt />Logout
-        </button>
-      </header>
+    <>
+      <Navbar />
+      <main className="App-header">
+        <Row>
+          <Col>
+            <h1>End-user: Add Car Item {" "}
+              <span><Link to="/end-user/">Go to Profile</Link></span></h1>
+            <Form.Select className="SelectForm mt-3"
+              style={{ width: 200 }} onChange={filterHandle} >
+              <option value="true">แสดงรถที่ว่าง</option>
+              <option value="แสดงทั้งหมด">แสดงทั้งหมด</option>
+              <option value="false">แสดงรถที่ไม่ว่าง</option>
+            </Form.Select>
+            <hr />
 
-    </div>
+            {filteredCarItems.length > 0 ? (
+              <Row xs={1} md={3} className="g-4">
+                {filteredCarItems.map((item) =>
+                  <CarItemCard key={item._id} carItem={item} />)}
+              </Row>
+            ) : (
+              <h3>ไม่มีรถที่ว่าง</h3>
+            )}
+          </Col>
+        </Row>
+      </main>
+
+    </>
 
   );
 }

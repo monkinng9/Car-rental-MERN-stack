@@ -9,14 +9,13 @@ function LandingPage() {
 
   const { user, isLoading, isError, message } = useSelector((state) => state.auth);
 
-
   useEffect(
     () => {
       if (!user) {
         navigate('/login');
       }
       else if (user.role === 'end-user') {
-        navigate('/end-user/cardashboard');
+        navigate('/end-user/');
       }
 
       else if (user.role === 'admin') {

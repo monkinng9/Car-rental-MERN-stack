@@ -63,22 +63,22 @@ function Register() {
 		<div className="Auth-form-container">
 			<form className="Auth-form" onSubmit={onSubmit}>
 				<div className="Auth-form-content">
-					<h3 className="Auth-form-title">Sign Up</h3>
+					<h3 className="Auth-form-title">ลงทะเบียน</h3>
 					<div className="text-center">
-						Already registered? <Link to='/login' className="link-primary" >Sign In</Link>
+						ลงทะเบียนเรียบร้อยแล้ว? <Link to='/login' className="link-primary" >เข้าสู่ระบบ</Link>
 					</div>
 					<div className="form-group mt-3">
-						<label>Full Name</label>
+						<label>ชื่อเต็ม</label>
 						<input type="text" 
               className="form-control mt-1" 
-              placeholder="e.g Jane Doe"
+              placeholder="ชื่อเต็ม"
               name='name'
               value={name}
               onChange={onChange} />
 					</div>
 					<div className="form-group mt-3">
-						<label>Email address</label>
-						<input type="email" 
+						<label>ที่อยู่อีเมล (Email Address)</label>
+						<input type="อีเมล" 
               className="form-control mt-1" 
               placeholder="Email Address"
               name='email'
@@ -86,19 +86,19 @@ function Register() {
               onChange={onChange} />
 					</div>
 					<div className="form-group mt-3">
-						<label>Password</label>
+						<label>รหัสผ่าน (Password)</label>
 						<input type="password" 
               className="form-control mt-1" 
-              placeholder="Password"
+              placeholder="รหัสผ่าน (Password)"
               name='password'
               value={password}
               onChange={onChange} />
 					</div>
 					<div className="form-group mt-3">
-						<label>Confirm Password</label>
+						<label>ยืนยันรหัสผ่าน (Confirm Password)</label>
 						<input type="password" 
               className="form-control mt-1" 
-              placeholder="Confirm Password"
+              placeholder="ยืนยันรหัสผ่าน (Confirm Password)"
               name='password2'
               value={password2}
               onChange={onChange} />

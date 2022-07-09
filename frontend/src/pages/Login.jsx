@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login, reset } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
+import "./Register.styles.scss"
 
 function Login() {
 	const [ formData, setFormData ] = useState({
@@ -59,12 +60,12 @@ function Login() {
 		<div className="Auth-form-container">
 			<form className="Auth-form" onSubmit={onSubmit}>
 				<div className="Auth-form-content">
-					<h3 className="Auth-form-title">Sign In</h3>
+					<h3 className="Auth-form-title">ลงชื่อเข้าใช้งาน <br/><span> ระบบยืมรถกองงาน</span></h3>
 					<div className="text-center">
-						Not registered yet? <Link to='/register' className="link-primary">Sign Up</Link>
+						ยังไม่ลงทะเบียน? <Link to='/register' className="link-primary">ลงทะเบียน</Link>
 					</div>
 					<div className="form-group mt-3">
-						<label>Email address</label>
+						<label>อีเมล:</label>
 						<input
 							type="email"
 							className="form-control mt-1"
@@ -75,7 +76,7 @@ function Login() {
 						/>
 					</div>
 					<div className="form-group mt-3">
-						<label>Password</label>
+						<label>รหัสผ่าน</label>
 						<input
 							type="password"
 							className="form-control mt-1"
