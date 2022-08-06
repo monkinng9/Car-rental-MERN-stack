@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createCarItem } from '../../features/carItems/carItemSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './AddCarItemForm.styles.scss';
 
 function AddCarItemForm() {
   const dispatch = useDispatch();

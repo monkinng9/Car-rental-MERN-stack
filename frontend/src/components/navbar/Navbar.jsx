@@ -30,8 +30,8 @@ function Navbar() {
       </SidebarHeader>
         <SidebarContent>
           <Menu iconShape="circle">
-          <MenuItem icon={<AiFillIdcard /> } className="returnForm">คืนรถ และประวัติการยืม</MenuItem>
-          <MenuItem icon={<AiFillCar />} id='endUser'>รายการรถ</MenuItem>
+          <MenuItem icon={<AiFillIdcard /> } className="returnForm" onClick={() => {navigate("/end-user/")}}>คืนรถ และประวัติการยืม</MenuItem>
+          <MenuItem icon={<AiFillCar />} id='endUser' onClick={() => {navigate("/end-user/cardashboard")}}>รายการรถ</MenuItem>
           <br/><br/><br/><br/><br/><br/><br/><br/>
           <hr/>
           <MenuItem icon={<FaGem />}>ออกจากระบบ</MenuItem>

@@ -6,9 +6,6 @@ import {AiFillEdit} from 'react-icons/ai';
 import './CarItemCardAdmin.styles.scss'
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 function CarItemCardAdmin({ carItem }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();

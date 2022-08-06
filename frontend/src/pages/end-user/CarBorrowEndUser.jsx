@@ -9,6 +9,8 @@ import CarItemCard from '../../components/end-user/CarItemCardEndUser';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from '../../components/navbar/Navbar';
+import { getCurrentDate } from '../../components/Date';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 function DashboardEndUser() {
   const navigate = useNavigate();
@@ -19,7 +21,8 @@ function DashboardEndUser() {
   const { borrowForms } = useSelector((state) => state.borrowCarForms);
 
   const [filteredCarItems, setFilteredCarItems] = useState([]);
-  const [carStatusFilter, setCarStatusFilter] = useState('true');
+  const [carStatusFilter, setCarStatusFilter] = useState('แสดงทั้งหมด');
+  const [currentDateThai, setCurrentDateThai] = useState();
 
   useEffect(
     () => {
@@ -28,6 +31,12 @@ function DashboardEndUser() {
       } else {
         dispatch(getCarItems());
         dispatch(getBorrowCarForm());
+        let newCurrentDateThai = getCurrentDate().toLocaleDateString("th-TH", {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        setCurrentDateThai(newCurrentDateThai);
       }
       if (isError) {
         console.log(message);
@@ -44,7 +53,8 @@ function DashboardEndUser() {
     let result = [];
     result = carItems.filter(item => item.carAvailable === true);
     setFilteredCarItems(result);
-    if (carStatusFilter === 'แสดงทั้งหมด' || carStatusFilter === null) {
+    if (carStatusFilter === 'แสดงทั้งหมด' || carStatusFilter === 'เลือกสถานะรถ' 
+      || carStatusFilter === null) {
       setFilteredCarItems(carItems);
     } else if (carStatusFilter === 'false') {
       result = carItems.filter(item => item.carAvailable === false);
@@ -80,17 +90,43 @@ function DashboardEndUser() {
       <Navbar />
       <main className="App-header">
         <Row>
+          <h3 className="mb-3">วันที่ {currentDateThai}</h3>
+        </Row>
+        <Row>
           <Col>
-            <h1>End-user: Add Car Item {" "}
-              <span><Link to="/end-user/">Go to Profile</Link></span></h1>
-            <Form.Select className="SelectForm mt-3"
-              style={{ width: 200 }} onChange={filterHandle} >
-              <option value="true">แสดงรถที่ว่าง</option>
-              <option value="แสดงทั้งหมด">แสดงทั้งหมด</option>
-              <option value="false">แสดงรถที่ไม่ว่าง</option>
-            </Form.Select>
-            <hr />
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="inputGroup-sizing-default">
+                ค้นหาทะเบียน
+              </InputGroup.Text>
+              <Form.Control
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </InputGroup>
+          </Col>
+          <Col>
+            <div className="mb-3 ">
+              <Form.Select className="SelectForm"
+                style={{ width: 200 }} >
+              </Form.Select>
+            </div>
+          </Col>
+          <Col>
+            <div className="mb-3">
+              <Form.Select className="SelectForm"
+                style={{ width: 200 }} onChange={filterHandle} >
+                <option disabled selected hidden>เลือกสถานะรถ</option>
+                <option value="แสดงทั้งหมด">แสดงทั้งหมด</option>
+                <option value="true">แสดงรถที่ว่าง</option>
+                <option value="false">แสดงรถที่ไม่ว่าง</option>
+              </Form.Select>
+            </div>
+          </Col>
 
+          <hr />
+        </Row>
+        <Row>
+          <Col>
             {filteredCarItems.length > 0 ? (
               <Row xs={1} md={3} className="g-4">
                 {filteredCarItems.map((item) =>
